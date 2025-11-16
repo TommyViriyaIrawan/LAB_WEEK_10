@@ -30,14 +30,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun prepareViewModel() {
 
-        // Observe LiveData
-        viewModel.total.observe(this) { total ->
-            updateText(total)
-        }
+        // Observe the LiveData object
+        viewModel.total.observe(this, {
+            // Whenever the value changes, update text
+            updateText(it)
+        })
 
-        // Button listener
         findViewById<Button>(R.id.button_increment).setOnClickListener {
             viewModel.incrementTotal()
         }
     }
+
 }

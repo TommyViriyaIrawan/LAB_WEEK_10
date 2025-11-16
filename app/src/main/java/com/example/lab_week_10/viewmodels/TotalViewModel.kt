@@ -1,13 +1,23 @@
 package com.example.lab_week_10.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class TotalViewModel : ViewModel() {
+class TotalViewModel: ViewModel() {
 
-    val total = MutableLiveData(0)
+    // Declare the LiveData object
+    private val _total = MutableLiveData<Int>()
+    val total: LiveData<Int> = _total
 
+    // Initialize the LiveData object
+    init {
+        // postValue can update from any thread
+        _total.postValue(0)
+    }
+
+    // Increment the total value
     fun incrementTotal() {
-        total.value = (total.value ?: 0) + 1
+        _total.postValue(_total.value?.plus(1))
     }
 }

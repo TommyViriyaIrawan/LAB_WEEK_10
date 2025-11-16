@@ -36,15 +36,11 @@ class FirstFragment : Fragment() {
         val viewModel =
             ViewModelProvider(requireActivity()).get(TotalViewModel::class.java)
 
-        // Observe LiveData object
-        viewModel.total.observe(viewLifecycleOwner, {
-            // Update UI when value changes
+        viewModel.total.observe(viewLifecycleOwner) {
             updateText(it)
-        })
+        }
     }
 
-
-    // ✅ Companion object moved to the correct location (inside the class body)
     companion object {
         fun newInstance(param1: String, param2: String) =
             FirstFragment()
